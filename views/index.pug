@@ -5,6 +5,7 @@ block body
     div(class="filter")
       div(class="month")
         select(class="month-select")
+          option(selected disabled hidden) 月份
           option 一月
           option 二月
           option 三月
@@ -19,6 +20,7 @@ block body
           option 十二月
       div(class="type")
         select(class="type-select")
+          option(selected disabled hidden) 類別
           option 家居物業
           option 交通出行
           option 休閒娛樂
@@ -37,8 +39,8 @@ block body
             div(class="date") #{record.date}
           div(class="amount") #{record.amount}
           div(class="edit_delete")
-            a(href=`/record/${record._id}`) 修改
-            a(href=`/record/${record._id}`) 刪除
+            a(href=`/record/${record._id}/edit`) 修改
+            a(href=`/record/${record._id}/delete`) 刪除
     div(class="new")
       a(href="/record/new") 新增支出
     
