@@ -28,7 +28,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 
 app.use("/", require("./routes/home"));
-// app.use("/record", require("./routes/record"));
+app.use("/record", require("./routes/record"));
 // app.use("/user", require("./routes/user"));
 
 app.listen(3000, () => {

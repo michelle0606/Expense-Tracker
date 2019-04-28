@@ -21,9 +21,6 @@ main {
   grid-area: outer;
 }
 
-.edit_delete {
-}
-
 .new {
   grid-area: new;
 }
