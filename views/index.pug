@@ -1,5 +1,46 @@
 extends layouts/main.pug
 
 block body
+  main
+    div(class="filter")
+      div(class="month")
+        select(class="month-select")
+          option 一月
+          option 二月
+          option 三月
+          option 四月
+          option 五月
+          option 六月
+          option 七月
+          option 八月
+          option 九月
+          option 十月
+          option 十一月
+          option 十二月
+      div(class="type")
+        select(class="type-select")
+          option 家居物業
+          option 交通出行
+          option 休閒娛樂
+          option 餐飲食品
+          option 其他
+    div(class="total")
+      p 總金額：
+      span(id="total_amount") 25460
+    div(class="outer")
+      each record in records
+        div(class="record_list")
+          div(class="category")
+            i(class="fas fa-home")
+          div(class="middle")
+            div(class="type_name") #{record.name}
+            div(class="date") #{record.date}
+          div(class="amount") #{record.amount}
+          div(class="edit_delete")
+            a(href=`/record/${record._id}`) 修改
+            a(href=`/record/${record._id}`) 刪除
+    div(class="new")
+      a(href="/record/new") 新增支出
+    
 
   

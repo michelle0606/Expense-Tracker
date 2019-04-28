@@ -1,0 +1,29 @@
+main {
+  display: grid;
+  grid-template-rows: 80px 120px 450px 100px;
+  grid-template-columns: 1fr 450px 400px;
+  grid-template-areas:
+    ". filter ."
+    ". total ."
+    ". outer ."
+    ". new .";
+}
+
+.filter {
+  grid-area: filter;
+}
+
+.total {
+  grid-area: total;
+}
+
+.outer {
+  grid-area: outer;
+}
+
+.edit_delete {
+}
+
+.new {
+  grid-area: new;
+}
