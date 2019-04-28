@@ -4,7 +4,10 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const methodOverride = require("method-override");
 
-mongoose.connect("mongodb://localhost/recorder", { useNewUrlParser: true });
+mongoose.connect("mongodb://localhost/recorder", {
+  useNewUrlParser: true,
+  useCreateIndex: true
+});
 
 const db = mongoose.connection;
 
@@ -24,6 +27,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 
 app.use("/", require("./routes/home"));
+// app.use("/record", require("./routes/record"));
+// app.use("/user", require("./routes/user"));
 
 app.listen(3000, () => {
   console.log("App is running!");
