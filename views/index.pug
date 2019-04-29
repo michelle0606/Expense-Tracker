@@ -8,7 +8,8 @@ block body
           select(name="month" class="month-select" OnInput='form.submit()')
             option(selected disabled hidden) 月份
               each month, index in ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月']
-                if index+1 == `${select.month}` //弱型別判斷
+                //- 弱型別判斷 
+                if index+1 == `${select.month}`
                   option(value=`${index+1}` selected) #{month}
                 else
                   option(value=`${index+1}`) #{month}

@@ -4,7 +4,8 @@ const Record = require("../models/record");
 
 // 新增頁面
 router.get("/new", (req, res) => {
-  res.render("new");
+  const date = new Date();
+  res.render("new", { date });
 });
 
 // 儲存新增
