@@ -4,7 +4,7 @@ const Record = require("../models/record");
 
 // 新增頁面
 router.get("/new", (req, res) => {
-  const date = new Date();
+  const date = new Date(); // default date
   res.render("new", { date });
 });
 

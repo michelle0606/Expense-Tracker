@@ -13,17 +13,17 @@ block body
     div(class="form-group row")
       label(for="date" class="col-sm-3 col-form-label") 日期*：
       div(class="col-sm-9")
-        input(type="date" class="form-control" id="date" name="date" value=`${record.date}`)
+        input(type="date" class="form-control" id="date" name="date" value=`${record.date.toISOString().slice(0,10)}`)
     div(class="form-group row")
       label(for="category" class="col-sm-3 col-form-label") 類別*：
       div(class="col-sm-9")
-        select(class="form-control" id="category" name="category" value=`${record.category}`)
+        select(class="form-control" id="category" name="category")
           option(selected disabled hidden) 選擇類別
-          option(value="home") 家居物業
-          option(value="traffic") 交通出行
-          option(value="entertainment") 休閒娛樂
-          option(value="food") 餐飲食品
-          option(value="other") 其他
+            each category, index in ['家居物業', '交通出行', '休閒娛樂', '餐飲食品', '其它']
+              if category === `${record.category}`
+                option(value=`${category}` selected) #{category}
+              else
+                option(value=`${category}`) #{category}
     div(class="form-group row")
       label(for="amount" class="col-sm-3 col-form-label") 金額*：
       div(class="col-sm-9")
