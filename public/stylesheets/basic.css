@@ -7,7 +7,6 @@ body {
 body {
   padding: 0px;
   margin: 0px;
-  font-size: 14px;
   line-height: 1.42857143;
   color: #333;
   background-color: #fff;
@@ -38,8 +37,6 @@ ol {
 a,
 a:hover,
 a:focus {
-  margin: 0px;
-  padding: 0px;
   text-decoration: none;
 }
 

@@ -27,12 +27,23 @@ router.get("/:id/edit", (req, res) => {
 });
 
 // 儲存編輯
-router.post("/", (req, res) => {
+router.put("/:id", (req, res) => {
   Record.findById({ _id: req.params.id }, (err, record) => {
     if (err) return console.error(err);
     Object.assign(record, req.body);
 
     record.save(err => {
+      if (err) return console.error(err);
+      return res.redirect("/");
+    });
+  });
+});
+
+// 刪除紀錄
+router.delete("/:id/delete", (req, res) => {
+  Record.findById({ _id: req.params.id }, (err, record) => {
+    if (err) return console.error(err);
+    record.remove(err => {
       if (err) return console.error(err);
       return res.redirect("/");
     });

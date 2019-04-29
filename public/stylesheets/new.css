@@ -1,0 +1,45 @@
+input[type="date"] {
+  position: relative;
+}
+
+input[type="date"]:before {
+  display: block;
+  font-family: "FontAwesome";
+  content: "\f073";
+  position: absolute;
+  right: 10px;
+  color: #999;
+}
+
+.new_page {
+  width: 350px;
+  margin: 66px auto;
+}
+
+.form-control {
+  border-radius: 0px;
+  border: 1px solid #000000;
+}
+
+.form_title {
+  font-size: 28px;
+  padding-left: 33px;
+}
+
+.new_page > .row {
+  margin: 32px 0px;
+}
+
+.top {
+  display: flex;
+  padding: 0px 15px;
+}
+
+.center {
+  text-align: center;
+}
+
+.new {
+  color: #fff;
+  cursor: pointer;
+}

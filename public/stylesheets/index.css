@@ -1,7 +1,7 @@
 main {
   display: grid;
-  grid-template-rows: 80px 120px 450px 100px;
-  grid-template-columns: 1fr 450px 400px;
+  grid-template-rows: 80px 110px 400px 60px;
+  grid-template-columns: 1fr 560px 1fr;
   grid-template-areas:
     ". filter ."
     ". total ."
@@ -9,18 +9,130 @@ main {
     ". new .";
 }
 
+.navbar {
+  padding: 0.5rem 6rem;
+}
+
+.navbar-brand {
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+nav > a {
+  color: #ee5935;
+  background-color: #fff;
+  border: 1px solid black;
+  border-radius: 5px;
+  margin-right: 20px;
+  padding: 5px 10px;
+}
+
 .filter {
   grid-area: filter;
+  display: flex;
+  align-items: center;
+}
+
+.month > select,
+.type > select {
+  width: 188px;
+  height: 36px;
+  font-size: 18px;
+  margin: auto 12px;
 }
 
 .total {
   grid-area: total;
 }
 
+.total > p {
+  font-size: 20px;
+  padding: 0px 14px;
+}
+
+#total_amount {
+  text-align: right;
+  padding-right: 162px;
+  font-size: 66px;
+  letter-spacing: 4px;
+  color: #ee5935;
+}
+
 .outer {
   grid-area: outer;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  margin-top: 10px;
 }
 
 .new {
   grid-area: new;
+  margin: auto 115px;
+  border: 1px solid black;
+  background-color: #ee5935;
+  color: #fff;
+  border-radius: 6px;
+  width: 170px;
+  text-align: center;
+  padding: 8px;
+  font-size: 18px;
+}
+
+.new > a {
+  color: #fff;
+}
+
+.main-info {
+  font-size: 18px;
+}
+
+.record_list:nth-child(odd) {
+  background-color: #dddddd;
+}
+
+.record_list {
+  display: grid;
+  grid-template-columns: 70px 330px 200px;
+  grid-template-rows: 70px;
+  grid-template-areas: "icon main button";
+}
+
+.middle {
+  grid-area: main;
+  display: flex;
+  margin: auto 0px;
+}
+
+.amount {
+  justify-content: flex-end;
+  margin: auto 0px auto auto;
+  font-size: 24px;
+  padding-right: 14px;
+}
+
+.category {
+  grid-area: icon;
+  margin: auto;
+  font-size: 36px;
+}
+
+.edit_delete {
+  grid-area: button;
+  background-color: #fff;
+  text-align: center;
+  line-height: 4.4;
+}
+
+.edit_delete > a,
+#delete_button {
+  padding: 0px 10px;
+  border: none;
+  color: #000000;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.edit_delete > form {
+  display: inline-block;
 }

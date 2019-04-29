@@ -3,44 +3,40 @@ extends layouts/main.pug
 block body
   main
     div(class="filter")
-      div(class="month")
-        select(class="month-select")
-          option(selected disabled hidden) 月份
-          option 一月
-          option 二月
-          option 三月
-          option 四月
-          option 五月
-          option 六月
-          option 七月
-          option 八月
-          option 九月
-          option 十月
-          option 十一月
-          option 十二月
-      div(class="type")
-        select(class="type-select")
-          option(selected disabled hidden) 類別
-          option 家居物業
-          option 交通出行
-          option 休閒娛樂
-          option 餐飲食品
-          option 其他
+      form(id="form" action="/" method="GET" class="row justify-content-center")
+        div(class="month")
+          select(name="month" class="month-select" OnInput='form.submit()')
+            option(selected disabled hidden) 月份
+              each month, index in ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月']
+                if index+1 == `${select.month}` //弱型別判斷
+                  option(value=`${index+1}` selected) #{month}
+                else
+                  option(value=`${index+1}`) #{month}
+        div(class="type")
+          select(name="category" class="type-select" OnInput='form.submit()')
+            option(selected disabled hidden) 類別
+              each category, index in ['家居物業', '交通出行', '休閒娛樂', '餐飲食品', '其它']
+                if category === `${select.category}`
+                  option(value=`${category}` selected) #{category}
+                else
+                  option(value=`${category}`) #{category}
     div(class="total")
       p 總金額：
-      span(id="total_amount") 25460
+      div(id="total_amount") #{total}
     div(class="outer")
       each record in records
         div(class="record_list")
-          div(class="category")
-            i(class="fas fa-home")
+          div(class="category") 
+            i(class=`${record.category}`)
           div(class="middle")
-            div(class="type_name") #{record.name}
-            div(class="date") #{record.date}
-          div(class="amount") #{record.amount}
+            div(class="main-info")
+              div(class="type_name") #{record.name}
+              div(class="date") #{record.date.getFullYear()}/#{record.date.getMonth()+1}/#{record.date.getDate()}
+            div(class="amount") #{record.amount}
           div(class="edit_delete")
             a(href=`/record/${record._id}/edit`) 修改
-            a(href=`/record/${record._id}/delete`) 刪除
+            form(action=`/record/${record._id}/delete?_method=DELETE` method="POST")
+              button(id="delete_button" type="submit") 刪除
     div(class="new")
       a(href="/record/new") 新增支出
     

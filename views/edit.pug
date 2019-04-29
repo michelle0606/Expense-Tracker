@@ -2,18 +2,21 @@ extends layouts/main.pug
 
 block body
 
-  form(action=`/record/${record._id}` method="POST")
+  form(action=`/record/${record._id}?_method=PUT` method="POST" class="new_page")
+    div(class="top")
+      div *必填欄位
+      span(class="form_title") 請修改你的支出
     div(class="form-group row")
-      label(for="name" class="col-sm-2 col-form-label") 名稱
-      div(class="col-sm-10")
+      label(for="name" class="col-sm-3 col-form-label") 名稱*：
+      div(class="col-sm-9")
         input(type="text" class="form-control" id="name" name="name" value=`${record.name}`)
     div(class="form-group row")
-      label(for="date" class="col-sm-2 col-form-label") 日期
-      div(class="col-sm-10")
+      label(for="date" class="col-sm-3 col-form-label") 日期*：
+      div(class="col-sm-9")
         input(type="date" class="form-control" id="date" name="date" value=`${record.date}`)
     div(class="form-group row")
-      label(for="category" class="col-sm-2 col-form-label") 類別
-      div(class="col-sm-10")
+      label(for="category" class="col-sm-3 col-form-label") 類別*：
+      div(class="col-sm-9")
         select(class="form-control" id="category" name="category" value=`${record.category}`)
           option(selected disabled hidden) 選擇類別
           option(value="home") 家居物業
@@ -22,9 +25,9 @@ block body
           option(value="food") 餐飲食品
           option(value="other") 其他
     div(class="form-group row")
-      label(for="amount" class="col-sm-2 col-form-label") 金額
-      div(class="col-sm-10")
+      label(for="amount" class="col-sm-3 col-form-label") 金額*：
+      div(class="col-sm-9")
         input(type="text" class="form-control" id="amount" name="amount" value=`${record.amount}`)
     div(class="form-group row")
-      div(class="col-sm-10")
-        button(type="submit" class="btn btn-primary") 新增
+      div(class="col-sm-12 center")
+        button(type="submit" class="new") 修改支出
