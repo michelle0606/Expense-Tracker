@@ -9,11 +9,11 @@ block body
     div(class="form-group row")
       label(for="name" class="col-sm-3 col-form-label") 名稱*：
       div(class="col-sm-9")
-        input(type="text" class="form-control" id="name" name="name" value=`${record.name}`)
+        input(type="text" class="form-control" id="name" name="name" value=`${record.name}` required)
     div(class="form-group row")
       label(for="date" class="col-sm-3 col-form-label") 日期*：
       div(class="col-sm-9")
-        input(type="date" class="form-control" id="date" name="date" value=`${record.date.toISOString().slice(0,10)}`)
+        input(type="date" class="form-control" id="date" name="date" value=`${record.date.toISOString().slice(0,10)}` required)
     div(class="form-group row")
       label(for="category" class="col-sm-3 col-form-label") 類別*：
       div(class="col-sm-9")
@@ -27,7 +27,7 @@ block body
     div(class="form-group row")
       label(for="amount" class="col-sm-3 col-form-label") 金額*：
       div(class="col-sm-9")
-        input(type="text" class="form-control" id="amount" name="amount" value=`${record.amount}`)
+        input(type="text" class="form-control" id="amount" name="amount" value=`${record.amount}` required)
     div(class="form-group row")
       div(class="col-sm-12 center")
         button(type="submit" class="new") 修改支出
