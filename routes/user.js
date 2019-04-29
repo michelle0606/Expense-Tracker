@@ -25,44 +25,42 @@ router.get("/register", (req, res) => {
 // 註冊檢查
 router.post("/register", (req, res) => {
   const { name, email, password, password2 } = req.body;
-  if (errors.length > 0) {
-    res.render("register", {
-      name,
-      email,
-      password,
-      password2
-    });
-  } else {
-    User.findOne({ email: email }).then(user => {
-      if (user) {
-        res.render("register", {
-          name,
-          email,
-          password,
-          password2
-        });
-      } else {
-        const newUser = new User({
-          name,
-          email,
-          password
-        });
-        // 密碼雜揍
-        bcrypt.genSalt(10, (err, salt) =>
-          bcrypt.hash(newUser.password, salt, (err, hash) => {
-            if (err) throw err;
-            newUser.password = hash;
-            newUser
-              .save()
-              .then(user => {
-                res.redirect("/");
-              })
-              .catch(err => console.log(err));
-          })
-        );
-      }
-    });
-  }
+  User.findOne({ email: email }).then(user => {
+    if (user) {
+      res.render("register", {
+        name,
+        email,
+        password,
+        password2
+      });
+    } else if (password !== password2) {
+      res.render("register", {
+        name,
+        email,
+        password,
+        password2
+      });
+    } else {
+      const newUser = new User({
+        name,
+        email,
+        password
+      });
+      // 密碼雜揍
+      bcrypt.genSalt(10, (err, salt) =>
+        bcrypt.hash(newUser.password, salt, (err, hash) => {
+          if (err) throw err;
+          newUser.password = hash;
+          newUser
+            .save()
+            .then(user => {
+              res.redirect("/");
+            })
+            .catch(err => console.log(err));
+        })
+      );
+    }
+  });
 });
 
 // 登出
