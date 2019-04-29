@@ -6,9 +6,16 @@ const Record = require("../models/record");
 const { authenticated } = require("../config/auth");
 
 router.get("/", authenticated, (req, res) => {
-  const date = req.query.month ? new Date() : false;
-  const category = req.query.category ? req.query.category : { $exists: true };
-  Record.find({ category })
+  const date = req.query.month ? new Date() : false; // 判斷是否filter date
+  const category = req.query.category
+    ? req.query.category
+    : {
+        $exists: true
+      }; // 判斷是否filter category
+  Record.find({
+    userId: req.user._id,
+    category
+  })
     .exec()
     .then(records => {
       let total = 0;
@@ -31,7 +38,10 @@ router.get("/", authenticated, (req, res) => {
       res.render("index", {
         records,
         total,
-        select: { month: req.query.month, category: req.query.category }
+        select: {
+          month: req.query.month,
+          category: req.query.category
+        }
       });
     })
     .catch(err => {

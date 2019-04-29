@@ -11,8 +11,10 @@ router.get("/new", authenticated, (req, res) => {
 
 // 儲存新增
 router.post("/", authenticated, (req, res) => {
-  const record = Record(req.body);
-  console.log(req.body);
+  const record = Record({
+    ...req.body,
+    userId: req.user._id
+  });
 
   record.save(err => {
     if (err) return console.log(err);
@@ -22,34 +24,43 @@ router.post("/", authenticated, (req, res) => {
 
 // 編輯頁面
 router.get("/:id/edit", authenticated, (req, res) => {
-  Record.findById({ _id: req.params.id }, (err, record) => {
-    if (err) return console.error(err);
-    return res.render("edit", { record });
-  });
+  Record.findById(
+    { userId: req.user._id, _id: req.params.id },
+    (err, record) => {
+      if (err) return console.error(err);
+      return res.render("edit", { record });
+    }
+  );
 });
 
 // 儲存編輯
 router.put("/:id", authenticated, (req, res) => {
-  Record.findById({ _id: req.params.id }, (err, record) => {
-    if (err) return console.error(err);
-    Object.assign(record, req.body);
-
-    record.save(err => {
+  Record.findById(
+    { userId: req.user._id, _id: req.params.id },
+    (err, record) => {
       if (err) return console.error(err);
-      return res.redirect("/");
-    });
-  });
+      Object.assign(record, req.body);
+
+      record.save(err => {
+        if (err) return console.error(err);
+        return res.redirect("/");
+      });
+    }
+  );
 });
 
 // 刪除紀錄
 router.delete("/:id/delete", authenticated, (req, res) => {
-  Record.findById({ _id: req.params.id }, (err, record) => {
-    if (err) return console.error(err);
-    record.remove(err => {
+  Record.findById(
+    { userId: req.user._id, _id: req.params.id },
+    (err, record) => {
       if (err) return console.error(err);
-      return res.redirect("/");
-    });
-  });
+      record.remove(err => {
+        if (err) return console.error(err);
+        return res.redirect("/");
+      });
+    }
+  );
 });
 
 module.exports = router;
