@@ -1,15 +1,16 @@
 const express = require("express");
 const router = express.Router();
 const Record = require("../models/record");
+const { authenticated } = require("../config/auth");
 
 // 新增頁面
-router.get("/new", (req, res) => {
+router.get("/new", authenticated, (req, res) => {
   const date = new Date(); // default date
   res.render("new", { date });
 });
 
 // 儲存新增
-router.post("/", (req, res) => {
+router.post("/", authenticated, (req, res) => {
   const record = Record(req.body);
   console.log(req.body);
 
@@ -20,7 +21,7 @@ router.post("/", (req, res) => {
 });
 
 // 編輯頁面
-router.get("/:id/edit", (req, res) => {
+router.get("/:id/edit", authenticated, (req, res) => {
   Record.findById({ _id: req.params.id }, (err, record) => {
     if (err) return console.error(err);
     return res.render("edit", { record });
@@ -28,7 +29,7 @@ router.get("/:id/edit", (req, res) => {
 });
 
 // 儲存編輯
-router.put("/:id", (req, res) => {
+router.put("/:id", authenticated, (req, res) => {
   Record.findById({ _id: req.params.id }, (err, record) => {
     if (err) return console.error(err);
     Object.assign(record, req.body);
@@ -41,7 +42,7 @@ router.put("/:id", (req, res) => {
 });
 
 // 刪除紀錄
-router.delete("/:id/delete", (req, res) => {
+router.delete("/:id/delete", authenticated, (req, res) => {
   Record.findById({ _id: req.params.id }, (err, record) => {
     if (err) return console.error(err);
     record.remove(err => {

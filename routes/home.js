@@ -3,8 +3,9 @@
 const express = require("express");
 const router = express.Router();
 const Record = require("../models/record");
+const { authenticated } = require("../config/auth");
 
-router.get("/", (req, res) => {
+router.get("/", authenticated, (req, res) => {
   const date = req.query.month ? new Date() : false;
   const category = req.query.category ? req.query.category : { $exists: true };
   Record.find({ category })

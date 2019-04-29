@@ -13,7 +13,7 @@ router.get("/login", (req, res) => {
 router.post("/login", (req, res, next) => {
   passport.authenticate("local", {
     successRedirect: "/",
-    failureRedirect: "/users/login"
+    failureRedirect: "/user/login"
   })(req, res, next);
 });
 
@@ -25,16 +25,8 @@ router.get("/register", (req, res) => {
 // 註冊檢查
 router.post("/register", (req, res) => {
   const { name, email, password, password2 } = req.body;
-  let errors = [];
-  if (password !== password2) {
-    errors.push({ message: "密碼輸入錯誤" });
-  }
-  if (password.length < 6) {
-    errors.push({ message: "密碼長度不足" });
-  }
   if (errors.length > 0) {
     res.render("register", {
-      errors,
       name,
       email,
       password,
@@ -43,9 +35,7 @@ router.post("/register", (req, res) => {
   } else {
     User.findOne({ email: email }).then(user => {
       if (user) {
-        errors.push({ message: "這個 Email 已經註冊過了" });
         res.render("register", {
-          errors,
           name,
           email,
           password,
@@ -78,7 +68,6 @@ router.post("/register", (req, res) => {
 // 登出
 router.get("/logout", (req, res) => {
   req.logout();
-  req.flash("success_msg", "你已經成功登出");
   res.redirect("/user/login");
 });
 
