@@ -20,7 +20,7 @@ block body
         select(class="form-control" id="category" name="category")
           option(selected disabled hidden) 選擇類別
             each category, index in ['家居物業', '交通出行', '休閒娛樂', '餐飲食品', '其它']
-              option #{category}
+              option(value=`${category}`) #{category}
     div(class="form-group row")
       label(for="amount" class="col-sm-3 col-form-label") 金額*：
       div(class="col-sm-9")
