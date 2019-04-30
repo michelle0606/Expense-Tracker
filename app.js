@@ -18,7 +18,7 @@ app.use(
   })
 );
 
-mongoose.connect("mongodb://localhost/recorder", {
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/recorder", {
   useNewUrlParser: true,
   useCreateIndex: true
 });
@@ -51,6 +51,6 @@ app.use("/record", require("./routes/record"));
 app.use("/user", require("./routes/user"));
 app.use("/auth", require("./routes/auth"));
 
-app.listen(3000, () => {
-  console.log("App is running!");
+app.listen(process.env.PORT || 3000, () => {
+  console.log("App is running");
 });
