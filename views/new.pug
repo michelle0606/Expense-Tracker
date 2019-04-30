@@ -19,11 +19,8 @@ block body
       div(class="col-sm-9")
         select(class="form-control" id="category" name="category")
           option(selected disabled hidden) 選擇類別
-          option(value="home") 家居物業
-          option(value="traffic") 交通出行
-          option(value="entertainment") 休閒娛樂
-          option(value="food") 餐飲食品
-          option(value="other") 其他
+            each category, index in ['家居物業', '交通出行', '休閒娛樂', '餐飲食品', '其它']
+              option #{category}
     div(class="form-group row")
       label(for="amount" class="col-sm-3 col-form-label") 金額*：
       div(class="col-sm-9")

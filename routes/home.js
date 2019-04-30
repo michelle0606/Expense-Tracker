@@ -63,7 +63,7 @@ function setIcon(record) {
     case "餐飲食品":
       record.category = "fas fa-utensils";
       break;
-    case "其他":
+    case "其它":
       record.category = "fas fa-pen";
       break;
     default:
