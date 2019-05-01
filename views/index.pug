@@ -6,7 +6,7 @@ block body
       form(id="form" action="/" method="GET" class="row justify-content-center")
         div(class="month")
           select(name="month" class="month-select" OnInput='form.submit()')
-            option(selected disabled hidden) 月份
+            option(value="" selected) 月份
               each month, index in ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月']
                 //- 弱型別判斷 
                 if index+1 == `${select.month}`
@@ -15,7 +15,7 @@ block body
                   option(value=`${index+1}`) #{month}
         div(class="type")
           select(name="category" class="type-select" OnInput='form.submit()')
-            option(selected disabled hidden) 類別
+            option(value="" selected) 類別
               each category, index in ['家居物業', '交通出行', '休閒娛樂', '餐飲食品', '其它']
                 if category === `${select.category}`
                   option(value=`${category}` selected) #{category}

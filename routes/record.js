@@ -15,7 +15,6 @@ router.post("/", authenticated, (req, res) => {
     ...req.body,
     userId: req.user._id
   });
-
   record.save(err => {
     if (err) return console.log(err);
     return res.redirect("/");
