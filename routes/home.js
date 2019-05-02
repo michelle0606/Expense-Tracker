@@ -6,28 +6,33 @@ const Record = require("../models/record");
 const { authenticated } = require("../config/auth");
 
 router.get("/", authenticated, (req, res) => {
-  const date = req.query.month ? new Date() : false;
+  const start = req.query.month ? new Date() : false;
+  const end = req.query.month ? new Date() : false;
   const category = req.query.category ? req.query.category : { $exists: true };
-  Record.find({ userId: req.user._id, category })
+  if (start && end) {
+    start.setMonth(Number(req.query.month - 1), [1]);
+    end.setMonth(Number(req.query.month - 1), [31]);
+    start.setHours(0);
+    end.setHours(0);
+    start.setMinutes(0);
+    end.setMinutes(0);
+    date = {
+      $gte: start,
+      $lte: end
+    };
+  } else {
+    date = { $exists: true };
+  }
+
+  Record.find({ userId: req.user._id, category, date })
     .exec()
     .then(records => {
       let total = 0;
-      records = records
-        .filter(record => {
-          if (date) {
-            date.setMonth(Number(req.query.month) - 1);
-            return (
-              record.date.toLocaleDateString().slice(0, 7) ===
-              date.toLocaleDateString().slice(0, 7)
-            );
-          }
-          return true;
-        })
-        .map(record => {
-          total += record.amount;
-          setIcon(record);
-          return record;
-        });
+      records = records.map(record => {
+        total += record.amount;
+        setIcon(record);
+        return record;
+      });
       res.render("index", {
         records,
         total,
